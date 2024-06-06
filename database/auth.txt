@@ -1,0 +1,48 @@
+admin
+email: admin@gmail.com
+username: admin
+password: admin
+
+owner futsalindo
+email: futsalindo@gmail.com
+username: futsalindo
+password: futsalindo
+
+owner zona futsal
+email: zonafutsal@gmail.com
+username: zonafutsal
+password: zonafutsal
+
+owner elphasindo
+email: elphasindo@gmail.com
+username: elphasindo
+password: elphasindo
+
+owner lapangan 8
+email: lapangan8@gmail.com
+username: lapangan8
+password: lapangan8
+
+owner argopuro
+email: argopuro@gmail.com
+username: argopuro
+password: argopuro
+
+user 1
+email: hamzah@gmail.com
+username: hamzah
+password: hamzah
+
+user 2
+email: ainol@gmail.com
+username: ainol
+password: ainol123
+
+user 3
+email: edok@gmail.com
+username: edok
+password: edok1234
+
+
+
+

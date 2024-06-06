@@ -7,11 +7,11 @@ include_once 'function/main.php';
 Router::url('/', 'get', function () { return view('home'); });
 Router::url('auth', 'get', 'AuthController::auth');
 Router::url('dashboard/logout', 'get', 'AuthController::logout');
-
-
-
-
 Router::url('dashboard', 'get', 'DashboardController::index');
+Router::url('dashboard/data-gedung', 'get', 'DashboardController::dataGedung');
+Router::url('dashboard/data-gedung/activate', 'get', 'GedungController::saveActive');
+Router::url('dashboard/data-gedung/deactivate', 'get', 'GedungController::saveInactive');
+
 Router::url('transaksi/add', 'get', 'TransaksiController::add');
 Router::url('transaksi/remove', 'get', 'TransaksiController::remove');
 Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
@@ -21,6 +21,8 @@ Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
 #POST
 Router::url('login', 'post', 'AuthController::saveLogin');
 Router::url('register', 'post', 'AuthController::saveRegister');
+
+
 Router::url('transaksi/add', 'post', 'TransaksiController::saveAdd');
 Router::url('transaksi/edit', 'post', 'TransaksiController::saveEdit');
 

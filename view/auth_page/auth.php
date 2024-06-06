@@ -50,12 +50,12 @@ if (isset($errorLog)) {
       <div class="toggle-panel toggle-right">
         <h1>Selamat Datang Kembali!</h1>
         <p>Masih belum memiliki akun?<br />Silahkan registrasi terlebih dahulu!</p>
-        <button class="hidden" id="register">Register</button>
+        <button class="hiddenn" id="register">Register</button>
       </div>
       <div class="toggle-panel toggle-left">
         <h1>Halo, Selamat<br />Datang!</h1>
         <p>Sudah memiliki akun?<br />Silahkan login terlebih dahulu!</p>
-        <button class="hidden" id="login">Login</button>
+        <button class="hiddenn" id="login">Login</button>
       </div>
     </div>
   </div>
