@@ -1,7 +1,7 @@
 
 <div class="container-top">
     <div class="con-detail">
-        <p class="text-lg font-medium">Sewa Kamera</p>
+        <p class="text-lg font-medium">Sewa Lapangan</p>
         <h1 class="text-[30px]">Dashboard</h1>
     </div>
     <div class="con-profile">
@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="container-mid" style="display: <?= $_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'renter' ? 'none' : 'block' ?>">
+<div class="container-mid">
     <h2>Data Hari Ini</h2>
     <div class="data">
         <div class="data1">

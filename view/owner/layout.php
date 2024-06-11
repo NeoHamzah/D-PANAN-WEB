@@ -1,5 +1,5 @@
 <?php 
-    $title = 'D-PANAN | Dashboard Admin';
+    $title = 'D-PANAN | Dashboard Owner';
     // $user = $_SESSION['user'];
 ?>
 
@@ -12,7 +12,7 @@
 <?php ob_start(); ?>
 <aside class="sidebar">
       <div class="sidebar-subitems">
-        <div id="pill1" class="sidebar-dashboard flex-left">
+        <div class="sidebar-dashboard flex-left active">
           <a href="<?= urlpath('dashboard'); ?>">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 24 24">
               <path d="M13.5 2c-.178 0-.356.013-.492.022l-.074.005a1 1 0 0 0-.934.998V11a1 1 0 0 0 1 1h7.975a1 1 0 0 0 .998-.934l.005-.074A7.04 7.04 0 0 0 22 10.5 8.5 8.5 0 0 0 13.5 2Z" />
@@ -21,8 +21,8 @@
             <p>Dashboard</p>
           </a>
         </div>
-        <div id="pill2" class="sidebar-profile flex-left">
-          <a href="">
+        <div class="sidebar-profile flex-left">
+          <a href="<?= urlpath('dashboard/data-gedung') ?>" style="display: <?= $_SESSION['user']['role'] === 'admin' ? 'flex' : 'none' ?>;">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 24 24">
               <path
                 fill-rule="evenodd"
@@ -30,7 +30,7 @@
                 clip-rule="evenodd"
               />
             </svg>
-            <a href="<?= urlpath('dashboard/data-gedung') ?>" >Data Gedung</a>
+            <p>Data Gedung</p>
           </a>
         </div>
         <div class="sidebar-logout flex-left">
@@ -56,15 +56,3 @@
 <?php $body = ob_get_clean(); ?>
 
 <?php include 'view/master.php'; ?>
-
-<script>
-    const pill1 = document.getElementById('pill1');
-    const pill2 = document.getElementById('pill2');
-    const searchParams = window.location.pathname.split('/');
-
-    if (searchParams.includes('data-gedung')) {
-      pill2.classList.add("active")
-    } else {
-      pill1.classList.add("active")
-    }
-  </script>

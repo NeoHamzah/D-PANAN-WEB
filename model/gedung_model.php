@@ -36,6 +36,48 @@ class Gedung
         return $data;
     }
 
+    static function selectSatuGedung($slug)
+    {
+        global $conn;
+        $sql = "SELECT * FROM gedung WHERE slug = '$slug'";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
+    static function selectLapangan($slug)
+    {
+        global $conn;
+        $sql = "SELECT * FROM detail_gedung INNER JOIN gedung ON gedung_id = id_gedung WHERE slug = '$slug'";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
+    static function selectJam()
+    {
+        global $conn;
+        $sql = "SELECT * FROM jam";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
     static function updateActive($id_gedung)
     {
         global $conn;

@@ -4,10 +4,47 @@ include_once 'config/conn.php';
 
 class Transaksi
 {
-    static function select()
+    // static function select()
+    // {
+    //     global $conn;
+    //     $sql = "SELECT * FROM transaksi";
+    //     $result = mysqli_query($conn, $sql);
+    //     $data = array();
+    //     if ($result->num_rows > 0) {
+    //         while ($a = $result->fetch_array()) {
+    //             $data[] = $a;
+    //         }
+    //     }
+    //     return $data;
+    // }
+    static function selectTransaksiUser($username)
     {
         global $conn;
-        $sql = "SELECT * FROM transaksi";
+        $sql = "SELECT id_transaksi, username, tanggal, nama_gedung, jam_sewa, nama_lapangan, bukti_transfer, transaksi.status FROM `transaksi`
+                INNER JOIN users ON user_id = id_user
+                INNER JOIN detail_gedung ON detail_id = id_detail
+                INNER JOIN gedung ON gedung_id = id_gedung
+                INNER JOIN jam ON jam_id = id_jam
+                WHERE username = '$username'";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
+    static function selectTransaksiGedung($gedung)
+    {
+        global $conn;
+        $sql = "SELECT id_transaksi, username, tanggal, nama_gedung, jam_sewa, nama_lapangan, bukti_transfer, transaksi.status FROM `transaksi`
+                INNER JOIN users ON user_id = id_user
+                INNER JOIN detail_gedung ON detail_id = id_detail
+                INNER JOIN gedung ON gedung_id = id_gedung
+                INNER JOIN jam ON jam_id = id_jam
+                WHERE slug = '$gedung' AND transaksi.status = 'diterima'";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -150,5 +187,18 @@ class Transaksi
         $result = $stmt->affected_rows > 0 ? true : false;
         $stmt->close();
         return $result;
+    }
+
+    static function rawQuery($sql) {
+        global $conn;
+        $result = $conn->query($sql);
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        $result->free();
+        return $rows;
     }
 }

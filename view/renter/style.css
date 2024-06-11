@@ -338,7 +338,14 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 20px 50px;
+  margin: 20px 30px;
+}
+
+.aksi-atass {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin: 20px 30px;
 }
 
 .create-data {
@@ -349,6 +356,17 @@ body {
   padding: 15px 25px 15px 25px;
   border-radius: 5px;
   border: 0px;
+}
+
+.btnn-cari {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #00c9c9;
+  padding: 15px 25px 15px 25px;
+  border-radius: 5px;
+  border: 0px;
+  margin-left: 10px;
 }
 
 .cari-data {
@@ -363,12 +381,6 @@ body {
 
 .cari-data:focus {
   outline: #2d9596;
-}
-
-.tabel {
-  margin: 30px;
-  display: flex;
-  justify-content: center;
 }
 
 table {
@@ -421,18 +433,52 @@ tr:nth-child(odd) {
   text-decoration: none;
 }
 
+.tabel {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.tabel-k th {
+  background-color: #2d9596;
+  color: white;
+  font-weight: 500;
+}
+
+.tabel-k th,
+td {
+  padding: 15px 8px;
+  text-align: center;
+}
+
+.tabel-k td:hover {
+  background-color: #2d94965e;
+}
+
+.tabel-k a {
+  text-decoration: none;
+}
+
+.tabel-k {
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+}
+
 .tabel .edit {
-  background-color: #ee0000;
+  background-color: #ff9100;
   padding: 10px;
   border-radius: 5px;
   border: 0px;
+  margin-right: 10px;
 }
 
 .tabel .delete {
-  background-color: #23d300;
+  background-color: #ff0000;
   padding: 10px;
   border-radius: 5px;
   border: 0px;
+  margin-left: 10px;
 }
 
 table tr .gambarTabel img{

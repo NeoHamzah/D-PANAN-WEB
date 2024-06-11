@@ -8,9 +8,26 @@ Router::url('/', 'get', function () { return view('home'); });
 Router::url('auth', 'get', 'AuthController::auth');
 Router::url('dashboard/logout', 'get', 'AuthController::logout');
 Router::url('dashboard', 'get', 'DashboardController::index');
+
+#ADMIN dan RENTER
 Router::url('dashboard/data-gedung', 'get', 'DashboardController::dataGedung');
+
+
+#ADMIN
 Router::url('dashboard/data-gedung/activate', 'get', 'GedungController::saveActive');
 Router::url('dashboard/data-gedung/deactivate', 'get', 'GedungController::saveInactive');
+
+
+#OWNER
+
+
+#RENTER
+Router::url('dashboard/detail-gedung', 'get', 'GedungController::detailGedung');
+Router::url('dashboard/pesanan-saya', 'get', 'TransaksiController::detailTransaksi');
+// Router::url('dashboard/dgedung', 'get', 'GedungController::dGedung');
+
+
+
 
 Router::url('transaksi/add', 'get', 'TransaksiController::add');
 Router::url('transaksi/remove', 'get', 'TransaksiController::remove');

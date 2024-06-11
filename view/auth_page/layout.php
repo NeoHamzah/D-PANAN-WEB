@@ -1,4 +1,4 @@
-<?php $title = 'Dashboard'; ?>
+<?php $title = 'AUTH PAGE'; ?>
 
 <?php 
     ob_start();
