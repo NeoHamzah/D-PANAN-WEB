@@ -535,6 +535,10 @@ table tr .gambarTabel img{
   margin: 30px 10px;
 }
 
+label {
+  margin: 20px 0px 0px 0px;
+}
+
 .form input {
   margin-top: 10px;
   margin-bottom: 20px;
@@ -544,6 +548,20 @@ table tr .gambarTabel img{
 }
 
 .form input:focus {
+    outline: none;
+}
+
+select {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  background-color: whitesmoke;
+  border: 3px solid #2d9596;
+  height: 50px;
+  /* margin-bottom: 20px; */
+}
+
+select:focus {
     outline: none;
 }
 

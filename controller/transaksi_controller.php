@@ -161,9 +161,13 @@ class TransaksiController
     //         header('Location: ' . BASEURL . 'auth?auth=false');
     //         exit;
     //     } else {
-    //         view('dash_page/layout', [
-    //             'url' => 'view/transaksi_crud_page/edit',
-    //             'trs' => Transaksi::selectSatu($_GET['id'])
+    //         $gedung = Gedung::selectSatuGedungOwner($_SESSION['user']['id_user']);
+    //         view('owner/layout', [
+    //             'url' => 'edit',
+    //             'trs' => Transaksi::selectForEdit($_GET['id']),
+    //             'gedung' => $gedung,
+    //             'lapangan' => Gedung::selectLapangan($gedung[0]['slug']),
+    //             'jam' => Gedung::selectJam(),
     //         ]);
     //     }
     // }
@@ -177,12 +181,8 @@ class TransaksiController
     //         $post = array_map('htmlspecialchars', $_POST);
     //         $transaksi = Transaksi::update([
     //             'id_transaksi' => $post['id_transaksi'],
-    //             'tanggal_transaksi' => $post['tanggal_transaksi'],
-    //             'nama_penyewa' => $post['nama_penyewa'],
-    //             'barang_disewa' => $post['barang_disewa'],
-    //             'jumlah_harga' => $post['jumlah_harga'],
-    //             'nomor_telepon' => $post['nomor_telepon'],
-    //             'gambarLama' => $post['gambarLama'],
+    //             'jam_sewa' => $post['jam_sewa'],
+    //             'nama_lapangan' => $post['nama_lapangan'],
     //         ]);
 
     //         if ($transaksi) {

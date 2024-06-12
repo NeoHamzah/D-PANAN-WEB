@@ -47,18 +47,4 @@ class DashboardController {
             }
         }
     }
-
-    // static function admin() {
-    //     if (!isset($_SESSION['user'])) {
-    //         header('Location: '.BASEURL.'login?auth=false');
-    //         exit;
-    //     }
-    //     else {
-    //         view('dash_page/layout', ['url' => 'admin', 'user' => $_SESSION['user']]);
-    //     }
-    // }
-
-    // static function transaksi() {
-    //     view('dash_page/layout', ['url' => 'transaksi', 'transaksi' => Transaksi::select(), 'user' => $_SESSION['user']]);
-    // }
 }

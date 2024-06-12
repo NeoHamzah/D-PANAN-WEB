@@ -31,7 +31,7 @@
                                 <?php
                                 $transactionFound = false;
                                 foreach ($transaksi as $tr) {
-                                    if ($tr['nama_lapangan'] == $lp['nama_lapangan'] && $tr['jam_sewa'] == $j['jam_sewa']) {
+                                    if ($tr['nama_lapangan'] == $lp['nama_lapangan'] && $tr['jam_sewa'] == $j['jam_sewa'] && $tr['tanggal'] == $tanggal) {
                                         $transactionFound = true;
                                         if ($tr['username'] == $_SESSION['user']['username']) {
                                             echo ($tr['username']);

@@ -22,6 +22,7 @@ Router::url('dashboard/kontrol-pesanan', 'get', 'TransaksiController::detailPesa
 Router::url('dashboard/kontrol-pesanan/terima', 'get', 'TransaksiController::saveTerima');
 Router::url('dashboard/kontrol-pesanan/tolak', 'get', 'TransaksiController::saveTolak');
 Router::url('dashboard/kontrol-pesanan/remove', 'get', 'TransaksiController::remove');
+Router::url('dashboard/kontrol-pesanan/update', 'get', 'TransaksiController::edit');
 
 
 #RENTER
@@ -33,9 +34,9 @@ Router::url('dashboard/pesanan-saya', 'get', 'TransaksiController::detailTransak
 
 
 
-Router::url('transaksi/add', 'get', 'TransaksiController::add');
-Router::url('transaksi/remove', 'get', 'TransaksiController::remove');
-Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
+// Router::url('transaksi/add', 'get', 'TransaksiController::add');
+// Router::url('transaksi/remove', 'get', 'TransaksiController::remove');
+// Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
 
 
 
@@ -43,13 +44,16 @@ Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
 Router::url('login', 'post', 'AuthController::saveLogin');
 Router::url('register', 'post', 'AuthController::saveRegister');
 
+#OWNER
+Router::url('dashboard/kontrol-pesanan/update', 'post', 'TransaksiController::saveEdit');
+
 #RENTER
 Router::url('dashboard/detail-gedung/addData', 'post', 'TransaksiController::saveAdd');
 
 
 
-Router::url('transaksi/add', 'post', 'TransaksiController::saveAdd');
-Router::url('transaksi/edit', 'post', 'TransaksiController::saveEdit');
+// Router::url('transaksi/add', 'post', 'TransaksiController::saveAdd');
+// Router::url('transaksi/edit', 'post', 'TransaksiController::saveEdit');
 
 
 new Router();

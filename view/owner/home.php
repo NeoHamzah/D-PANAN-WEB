@@ -61,7 +61,7 @@
     </div>
 </div> -->
 
-<div class="container-bottom" style="display: <?= $_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'renter' ? 'none' : 'block' ?>">
+<div class="container-bottom">
     <h2>Tabel Data Transaksi Sewa</h2>
     <hr />
     <div class="aksi-atass">
@@ -84,7 +84,7 @@
 
             <?php $i = 1;
             foreach ($transaksi as $row) :
-                if (!isset($_GET['keyword']) || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword']) :
+                if (!isset($_GET['keyword']) || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword'] || $row['username'] == $_GET['keyword']) :
             ?>
 
                     <tr>

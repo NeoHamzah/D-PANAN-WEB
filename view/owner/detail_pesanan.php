@@ -1,17 +1,7 @@
 <div class="container-bottom" style="display: <?= $_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'renter' ? 'none' : 'block' ?>">
     <h2>Tabel Data Transaksi Sewa</h2>
     <hr />
-    <div class="aksi-atas">
-        <form action="<?= urlpath('dashboard/detail-gedung/add'); ?>" method="post">
-            <input name="gedung" type="hidden" value="<?= $detailGedung[0]['nama_gedung'] ?>">
-            <input name="slug" type="hidden" value="<?= $detailGedung[0]['slug'] ?>">
-            <input name="an_rek" type="hidden" value="<?= $detailGedung[0]['an_rek'] ?>">
-            <input name="no_rek" type="hidden" value="<?= $detailGedung[0]['no_rek'] ?>">
-            <input name="harga_lapangan" type="hidden" value="<?= $detailGedung[0]['harga_lapangan'] ?>">
-            <input name="nomor_telepon" type="hidden" value="<?= $detailGedung[0]['nomor_telepon'] ?>">
-            <input name="tanggal" type="hidden" value="<?= isset($_GET['tanggal']) ? $_GET['tanggal'] : '' ?>">
-            <button class="create-data">Tambah</button>
-        </form>
+    <div class="aksi-atass">
         <form action="" method="get">
             <input class="cari-data" type="text" name="keyword" placeholder="Cari..." size="10" autocomplete="off" id="keyword" />
             <button id="buttonCari" type="submit" class="btnn-cari">Cari Data</button>
@@ -33,7 +23,7 @@
 
             <?php $i = 1;
             foreach ($transaksi as $row) :
-                if (!isset($_GET['keyword']) || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword']) :
+                if (!isset($_GET['keyword']) || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword'] || $row['username'] == $_GET['keyword']) :
             ?>
 
                     <tr>

@@ -28,7 +28,7 @@ class Transaksi
         $result = $stmt->affected_rows > 0 ? true : false;
         $stmt->close();
         return $result;
-    }    
+    }
 
     static function updateTolak($id_transaksi)
     {
@@ -50,7 +50,7 @@ class Transaksi
                 INNER JOIN detail_gedung ON detail_id = id_detail
                 INNER JOIN gedung ON gedung_id = id_gedung
                 INNER JOIN jam ON jam_id = id_jam
-                WHERE username = '$username' ORDER BY id_transaksi";
+                WHERE username = '$username' ORDER BY id_transaksi DESC";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -69,7 +69,7 @@ class Transaksi
                 INNER JOIN detail_gedung ON detail_id = id_detail
                 INNER JOIN gedung ON gedung_id = id_gedung
                 INNER JOIN jam ON jam_id = id_jam
-                WHERE slug = '$gedung' AND transaksi.status = 'diterima' ORDER BY id_transaksi";
+                WHERE slug = '$gedung' AND transaksi.status = 'diterima' ORDER BY id_transaksi DESC";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -88,7 +88,7 @@ class Transaksi
                 INNER JOIN detail_gedung ON detail_id = id_detail
                 INNER JOIN gedung ON gedung_id = id_gedung
                 INNER JOIN jam ON jam_id = id_jam
-                WHERE slug = '$gedung' ORDER BY id_transaksi";
+                WHERE slug = '$gedung' ORDER BY id_transaksi DESC";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -115,13 +115,13 @@ class Transaksi
     static function create($data)
     {
         global $conn;
-        $tanggal = htmlspecialchars($data['tanggal']); 
+        $tanggal = htmlspecialchars($data['tanggal']);
         $idJam = htmlspecialchars($data['jam_id']);
         $idDetail = htmlspecialchars($data['detail_id']);
         $idUser = htmlspecialchars($data['user_id']);
         $status = 'diproses';
-        $bukti = $data['bukti_transfer']; 
-    
+        $bukti = $data['bukti_transfer'];
+
         $sql = "INSERT INTO transaksi(detail_id, jam_id, user_id, tanggal, bukti_transfer, status) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('iiisss', $idDetail, $idJam, $idUser, $tanggal, $bukti, $status);
@@ -130,7 +130,7 @@ class Transaksi
         $stmt->close();
         return $result;
     }
-    
+
     static function upload()
     {
 
@@ -149,7 +149,7 @@ class Transaksi
                 echo "
                 <script>
                     alert('Upload hanya gambar, jangan file lain!')
-                    window.location.href = '".BASEURL."dashboard/pesanan-saya';
+                    window.location.href = '" . BASEURL . "dashboard/pesanan-saya';
                 </script>;
                 ";
                 return false;
@@ -159,7 +159,7 @@ class Transaksi
                     echo "
                     <script>
                         alert('Ukuran gambar terlalu besar!')
-                        window.location.href = '".BASEURL."dashboard/pesanan-saya';
+                        window.location.href = '" . BASEURL . "dashboard/pesanan-saya';
                     </script>;
                     ";
                     return false;
@@ -189,49 +189,26 @@ class Transaksi
         return $result;
     }
 
-    // static function update($data)
-    // {
-    //     global $conn;
-    //     $id = htmlspecialchars($data['id_transaksi']);
-    //     $tanggal_transaksi = htmlspecialchars($data['tanggal_transaksi']); 
-    //     $nama_penyewa = htmlspecialchars($data['nama_penyewa']);
-    //     $barang_disewa = htmlspecialchars($data['barang_disewa']);
-    //     $jumlah_harga = htmlspecialchars($data['jumlah_harga']);
-    //     $nomor_telepon = htmlspecialchars($data['nomor_telepon']);
-    //     $gambarLama = htmlspecialchars($data['gambarLama']);
+    static function selectForEdit($id_transaksi)
+    {
+        global $conn;
+        $sql = "SELECT id_transaksi, username, tanggal, nama_lapangan, jam_sewa, bukti_transfer, status FROM transaksi
+        INNER JOIN users ON user_id = id_user
+        INNER JOIN detail_gedung ON detail_id = id_detail
+        INNER JOIN jam ON jam_id = id_jam
+        WHERE id_transaksi=" . $id_transaksi;
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
 
-    //     // cek apakah user memilih gambar baru atau tidak
-    //     if ($_FILES['struk']['error'] === 4) {
-    //         $gambar = $gambarLama;
-    //     } else {
-    //         $gambar = self::upload();
-    //     }
-
-    //     if (!$gambar) {
-    //         return false;
-    //     }
-
-    //     $stmt = $conn->prepare("UPDATE transaksi set tanggal_transaksi=?, nama_penyewa=?, barang_disewa=?, jumlah_harga=?, nomor_telepon=?, gambar=? WHERE id_transaksi=?");
-    //     $stmt->bind_param("sssissi", $tanggal_transaksi, $nama_penyewa, $barang_disewa, $jumlah_harga, $nomor_telepon, $gambar, $id);
-    //     $stmt->execute();
-    //     $result = $stmt->affected_rows > 0 ? true : false;
-    //     $stmt->close();
-    //     return $result;
-    // }
-
-    // static function deleteGambar($id_transaksi)
-    // {
-    //     global $conn;
-    //     $gambar = 'none';
-    //     $stmt = $conn->prepare("UPDATE transaksi set gambar=? WHERE id_transaksi=" . $id_transaksi);
-    //     $stmt->bind_param("s", $gambar);
-    //     $stmt->execute();
-    //     $result = $stmt->affected_rows > 0 ? true : false;
-    //     $stmt->close();
-    //     return $result;
-    // }
-
-    static function rawQuery($sql) {
+    static function rawQuery($sql)
+    {
         global $conn;
         $result = $conn->query($sql);
         $rows = [];
