@@ -21,6 +21,24 @@ class TransaksiController
         }
     }
 
+    static function detailPesanan() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: '.BASEURL.'auth?auth=false');
+            exit;
+        } else {
+            if ($_SESSION['user']['role'] === 'owner') {
+                $gedung = Gedung::selectSatuGedungOwner($_SESSION['user']['id_user']);
+                view('owner/layout', [
+                    'url' => 'detail_pesanan',
+                    'transaksi' => Transaksi::selectTransaksiGedungTotal($gedung[0]['slug'])
+                ]);
+            } else {
+                header('Location: '.BASEURL.'auth?auth=false');
+                exit;
+            }
+        }
+    }
+
     static function add()
     {
         if (!isset($_SESSION['user'])) {
@@ -76,6 +94,65 @@ class TransaksiController
         </script>";
         }
     }
+
+    static function saveTerima()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'auth?auth=false');
+            exit;
+        } else {
+            $post = array_map('htmlspecialchars', $_POST);
+            $updateTransaksi = Transaksi::updateTerima($_GET['id']);
+
+            if ($updateTransaksi) {
+                header('Location: ' . BASEURL . 'dashboard/kontrol-pesanan');
+            } else {
+                echo "<script>
+                alert('Terima Gagal!');
+                window.location.href = '".BASEURL."dashboard/kontrol-pesanan';
+            </script>";
+            }
+        }
+    }
+
+    static function saveTolak()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'auth?auth=false');
+            exit;
+        } else {
+            $post = array_map('htmlspecialchars', $_POST);
+            $updateTransaksi = Transaksi::updateTolak($_GET['id']);
+
+            if ($updateTransaksi) {
+                header('Location: ' . BASEURL . 'dashboard/kontrol-pesanan');
+            } else {
+                echo "<script>
+                alert('Tolak Gagal!');
+                window.location.href = '".BASEURL."dashboard/kontrol-pesanan';
+            </script>";
+            }
+        }
+    }
+
+    static function remove()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'auth?auth=false');
+            exit;
+        } else {
+            $transaksi = Transaksi::delete($_GET['id']);
+            if ($transaksi) {
+                header('Location: ' . BASEURL . 'dashboard/kontrol-pesanan');
+            } else {
+                echo "<script>
+                alert('Hapus Gagal!');
+                window.location.href = '".BASEURL."dashboard/kontrol-pesanan';
+            </script>";
+            }
+        }
+    }
+
     
 
     // static function edit()
@@ -112,21 +189,6 @@ class TransaksiController
     //             header('Location: ' . BASEURL . 'dashboard');
     //         } else {
     //             header('Location: ' . BASEURL . 'transaksi/edit?id=' . $_GET['id'] . '&editFailed=true');
-    //         }
-    //     }
-    // }
-
-    // static function remove()
-    // {
-    //     if (!isset($_SESSION['user'])) {
-    //         header('Location: ' . BASEURL . 'auth?auth=false');
-    //         exit;
-    //     } else {
-    //         $transaksi = Transaksi::delete($_GET['id']);
-    //         if ($transaksi) {
-    //             header('Location: ' . BASEURL . 'dashboard');
-    //         } else {
-    //             header('Location: ' . BASEURL . 'dashboard?removeFailed=true');
     //         }
     //     }
     // }

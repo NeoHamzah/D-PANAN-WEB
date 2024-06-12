@@ -1,4 +1,3 @@
-
 <div class="container-top">
     <div class="con-detail">
         <p class="text-lg font-medium">Sewa Lapangan</p>
@@ -12,7 +11,7 @@
     </div>
 </div>
 
-<div class="container-mid">
+<!-- <div class="container-mid">
     <h2>Data Hari Ini</h2>
     <div class="data">
         <div class="data1">
@@ -60,78 +59,45 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="container-gedung" style="display: <?= $_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'renter' ? 'block' : 'none' ?>">
-    <h2 class="text-[24px] font-bold" >Silahkan Pilih Gedung Yang Anda Ingin <?= $_SESSION['user']['role'] == 'admin' ? 'Cek' : 'Sewa'?>!</h2>
-    <hr />
-    <div class="flex flex-col justify-center items-center">
-        <?php foreach ($gedung as $gd) : ?>
-            <div class="group relative overflow-hidden border-2 border-white/50 rounded-xl mb-[50px] w-[80vw] h-[300px]">
-                <div class="group-hover:bg-black/70 w-full h-full absolute z-40 transition-all duration-300"></div>
-                <img class="group-hover:scale-125 transition-all duration-500 object-cover w-full h-full" src="img/gedung/<?= $gd['gambar_gedung'] ?>" alt="Gambar Gedung">
-                <div class="text-[32px] text-[#2d9596] font-bold absolute -bottom-full left-12 group-hover:bottom-[160px] transition-all duration-500 z-50"><?= $gd['nama_gedung'] ?></div>
-                <div class="absolute text-white -bottom-full left-12 group-hover:bottom-[90px] transition-all duration-700 z-50">
-                    <span class="text-sm text-gradient"><?= $gd['deskripsi_gedung'] ?></span>
-                </div>
-            </div>
-        <?php endforeach ?>
-    </div>
-</div>
+</div> -->
 
 <div class="container-bottom" style="display: <?= $_SESSION['user']['role'] == 'admin' || $_SESSION['user']['role'] == 'renter' ? 'none' : 'block' ?>">
     <h2>Tabel Data Transaksi Sewa</h2>
     <hr />
-    <div class="aksi-atas">
-        <a href="<?= urlpath('transaksi/add'); ?>">
-            <button class="create-data">Tambah</button>
-        </a>
-        <input class="cari-data" type="text" name="keyword" placeholder="Cari..." size="10" autocomplete="off" id="keyword" />
+    <div class="aksi-atass">
+        <form action="" method="get">
+            <input class="cari-data" type="text" name="keyword" placeholder="Cari..." size="10" autocomplete="off" id="keyword" />
+            <button id="buttonCari" type="submit" class="btnn-cari">Cari Data</button>
+        </form>
     </div>
     <div class="tabel">
         <table cellspacing="0">
             <tr>
-                <th>Id Transaksi</th>
-                <th>Tanggal Transaksi</th>
-                <th>Nama Penyewa</th>
-                <th>Barang Disewa</th>
-                <th>Jumlah Harga</th>
-                <th>Nomor Telepon</th>
-                <th>Struk</th>
-                <th>Aksi</th>
+                <th>No.</th>
+                <th>Nama Renter</th>
+                <th>Tanggal Sewa</th>
+                <th>Jam Sewa</th>
+                <th>Nama Lapangan</th>
+                <th>Bukti Transfer</th>
+                <th>Status</th>
             </tr>
 
             <?php $i = 1;
             foreach ($transaksi as $row) :
+                if (!isset($_GET['keyword']) || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword']) :
             ?>
 
-                <tr>
-                    <td><?= $i ?></td>
-                    <td><?= $row['tanggal_transaksi'] ?></td>
-                    <td><?= $row['nama_penyewa'] ?></td>
-                    <td class="barangDisewa"><?= $row['barang_disewa'] ?></td>
-                    <td><?= $row['jumlah_harga'] ?></td>
-                    <td><?= $row['nomor_telepon'] ?></td>
-                    <td class="gambarTabel"><img src="img/struk/<?= $row['gambar'] ?>" alt=""></td>
-                    <td>
-                        <a href="<?= urlpath("transaksi/edit?id=" . $row['id_transaksi']); ?>">
-                            <button class="edit">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
-                                </svg>
-                            </button>
-                        </a>
-                        <a href="<?= urlpath("transaksi/remove?id=" . $row['id_transaksi']); ?>">
-                            <button class="delete" onclick="return confirm('Apakah kamu yakin ingin menghapus item ini?')">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                </svg>
-                            </button>
-                        </a>
-
-                    </td>
-                </tr>
-                <?php $i++ ?>
+                    <tr>
+                        <td><?= $i ?></td>
+                        <td><?= $row['username'] ?></td>
+                        <td><?= $row['tanggal'] ?></td>
+                        <td><?= $row['jam_sewa'] ?></td>
+                        <td><?= $row['nama_lapangan'] ?></td>
+                        <td class="gambarTabel"><img src="img/bukti_transaksi/<?= $row['bukti_transfer'] ?>" alt="bukti transfer"></td>
+                        <td><?= $row['status'] ?></td>
+                    </tr>
+                    <?php $i++ ?>
+                <?php endif ?>
             <?php endforeach ?>
         </table>
     </div>

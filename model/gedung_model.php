@@ -50,6 +50,20 @@ class Gedung
         return $data;
     }
 
+    static function selectSatuGedungOwner($id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM gedung WHERE user_id = '$id'";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
     static function selectLapangan($slug)
     {
         global $conn;

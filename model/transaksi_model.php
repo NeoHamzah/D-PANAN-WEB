@@ -17,6 +17,31 @@ class Transaksi
     //     }
     //     return $data;
     // }
+
+    static function updateTerima($id_transaksi)
+    {
+        global $conn;
+        $status = 'diterima';
+        $stmt = $conn->prepare("UPDATE transaksi set status=? WHERE id_transaksi=" . $id_transaksi);
+        $stmt->bind_param("s", $status);
+        $stmt->execute();
+        $result = $stmt->affected_rows > 0 ? true : false;
+        $stmt->close();
+        return $result;
+    }    
+
+    static function updateTolak($id_transaksi)
+    {
+        global $conn;
+        $status = 'ditolak';
+        $stmt = $conn->prepare("UPDATE transaksi set status=? WHERE id_transaksi=" . $id_transaksi);
+        $stmt->bind_param("s", $status);
+        $stmt->execute();
+        $result = $stmt->affected_rows > 0 ? true : false;
+        $stmt->close();
+        return $result;
+    }
+
     static function selectTransaksiUser($username)
     {
         global $conn;
@@ -25,7 +50,7 @@ class Transaksi
                 INNER JOIN detail_gedung ON detail_id = id_detail
                 INNER JOIN gedung ON gedung_id = id_gedung
                 INNER JOIN jam ON jam_id = id_jam
-                WHERE username = '$username'";
+                WHERE username = '$username' ORDER BY id_transaksi";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -44,7 +69,26 @@ class Transaksi
                 INNER JOIN detail_gedung ON detail_id = id_detail
                 INNER JOIN gedung ON gedung_id = id_gedung
                 INNER JOIN jam ON jam_id = id_jam
-                WHERE slug = '$gedung' AND transaksi.status = 'diterima'";
+                WHERE slug = '$gedung' AND transaksi.status = 'diterima' ORDER BY id_transaksi";
+        $result = mysqli_query($conn, $sql);
+        $data = array();
+        if ($result->num_rows > 0) {
+            while ($a = $result->fetch_array()) {
+                $data[] = $a;
+            }
+        }
+        return $data;
+    }
+
+    static function selectTransaksiGedungTotal($gedung)
+    {
+        global $conn;
+        $sql = "SELECT id_transaksi, username, tanggal, nama_gedung, jam_sewa, nama_lapangan, bukti_transfer, transaksi.status FROM `transaksi`
+                INNER JOIN users ON user_id = id_user
+                INNER JOIN detail_gedung ON detail_id = id_detail
+                INNER JOIN gedung ON gedung_id = id_gedung
+                INNER JOIN jam ON jam_id = id_jam
+                WHERE slug = '$gedung' ORDER BY id_transaksi";
         $result = mysqli_query($conn, $sql);
         $data = array();
         if ($result->num_rows > 0) {
@@ -133,36 +177,6 @@ class Transaksi
         }
     }
 
-    static function update($data)
-    {
-        global $conn;
-        $id = htmlspecialchars($data['id_transaksi']);
-        $tanggal_transaksi = htmlspecialchars($data['tanggal_transaksi']); 
-        $nama_penyewa = htmlspecialchars($data['nama_penyewa']);
-        $barang_disewa = htmlspecialchars($data['barang_disewa']);
-        $jumlah_harga = htmlspecialchars($data['jumlah_harga']);
-        $nomor_telepon = htmlspecialchars($data['nomor_telepon']);
-        $gambarLama = htmlspecialchars($data['gambarLama']);
-
-        // cek apakah user memilih gambar baru atau tidak
-        if ($_FILES['struk']['error'] === 4) {
-            $gambar = $gambarLama;
-        } else {
-            $gambar = self::upload();
-        }
-
-        if (!$gambar) {
-            return false;
-        }
-
-        $stmt = $conn->prepare("UPDATE transaksi set tanggal_transaksi=?, nama_penyewa=?, barang_disewa=?, jumlah_harga=?, nomor_telepon=?, gambar=? WHERE id_transaksi=?");
-        $stmt->bind_param("sssissi", $tanggal_transaksi, $nama_penyewa, $barang_disewa, $jumlah_harga, $nomor_telepon, $gambar, $id);
-        $stmt->execute();
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        return $result;
-    }
-
     static function delete($id_transaksi)
     {
         global $conn;
@@ -175,17 +189,47 @@ class Transaksi
         return $result;
     }
 
-    static function deleteGambar($id_transaksi)
-    {
-        global $conn;
-        $gambar = 'none';
-        $stmt = $conn->prepare("UPDATE transaksi set gambar=? WHERE id_transaksi=" . $id_transaksi);
-        $stmt->bind_param("s", $gambar);
-        $stmt->execute();
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        return $result;
-    }
+    // static function update($data)
+    // {
+    //     global $conn;
+    //     $id = htmlspecialchars($data['id_transaksi']);
+    //     $tanggal_transaksi = htmlspecialchars($data['tanggal_transaksi']); 
+    //     $nama_penyewa = htmlspecialchars($data['nama_penyewa']);
+    //     $barang_disewa = htmlspecialchars($data['barang_disewa']);
+    //     $jumlah_harga = htmlspecialchars($data['jumlah_harga']);
+    //     $nomor_telepon = htmlspecialchars($data['nomor_telepon']);
+    //     $gambarLama = htmlspecialchars($data['gambarLama']);
+
+    //     // cek apakah user memilih gambar baru atau tidak
+    //     if ($_FILES['struk']['error'] === 4) {
+    //         $gambar = $gambarLama;
+    //     } else {
+    //         $gambar = self::upload();
+    //     }
+
+    //     if (!$gambar) {
+    //         return false;
+    //     }
+
+    //     $stmt = $conn->prepare("UPDATE transaksi set tanggal_transaksi=?, nama_penyewa=?, barang_disewa=?, jumlah_harga=?, nomor_telepon=?, gambar=? WHERE id_transaksi=?");
+    //     $stmt->bind_param("sssissi", $tanggal_transaksi, $nama_penyewa, $barang_disewa, $jumlah_harga, $nomor_telepon, $gambar, $id);
+    //     $stmt->execute();
+    //     $result = $stmt->affected_rows > 0 ? true : false;
+    //     $stmt->close();
+    //     return $result;
+    // }
+
+    // static function deleteGambar($id_transaksi)
+    // {
+    //     global $conn;
+    //     $gambar = 'none';
+    //     $stmt = $conn->prepare("UPDATE transaksi set gambar=? WHERE id_transaksi=" . $id_transaksi);
+    //     $stmt->bind_param("s", $gambar);
+    //     $stmt->execute();
+    //     $result = $stmt->affected_rows > 0 ? true : false;
+    //     $stmt->close();
+    //     return $result;
+    // }
 
     static function rawQuery($sql) {
         global $conn;

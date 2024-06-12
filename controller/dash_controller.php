@@ -16,8 +16,10 @@ class DashboardController {
                     'gedung' => Gedung::select()
                 ]);
             } elseif ($_SESSION['user']['role'] === 'owner') {
+                $gedung = Gedung::selectSatuGedungOwner($_SESSION['user']['id_user']);
                 view('owner/layout', [
                     'url' => 'home',
+                    'transaksi' => Transaksi::selectTransaksiGedungTotal($gedung[0]['slug'])
                 ]);
             } elseif ($_SESSION['user']['role'] === 'renter') {
                 view('renter/layout', [
