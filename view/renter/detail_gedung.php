@@ -1,9 +1,11 @@
-<?php 
+<?php
 if (isset($_GET['tanggal'])) {
     $tgll = $_GET['tanggal'];
 } else {
     $tgll = '';
-}
+};
+
+// var_dump($detailGedung[0]['slug'])
 ?>
 
 <div class="container-top">
@@ -23,11 +25,18 @@ if (isset($_GET['tanggal'])) {
     <h2 class="text-[24px] font-bold">Gedung <?= $detailGedung[0]['nama_gedung'] ?></h2>
     <hr />
     <div class="aksi-atas">
-        <a href="<?= urlpath('transaksi/add'); ?>">
-            <button class="create-data">Tambah</button>
-        </a>
-        <form action="<?= urlpath('/dashboard/detail-gedung?' . $_GET['gedung' . '?tanggal=' . $tgll]) ?>" method="post">
-        <!-- <form action="" method="get"> -->
+        <form action="<?= urlpath('dashboard/detail-gedung/add'); ?>" method="post" >
+                <input name="gedung" type="hidden" value="<?= $detailGedung[0]['nama_gedung'] ?>" >
+                <input name="slug" type="hidden" value="<?= $detailGedung[0]['slug'] ?>" >
+                <input name="an_rek" type="hidden" value="<?= $detailGedung[0]['an_rek'] ?>" >
+                <input name="no_rek" type="hidden" value="<?= $detailGedung[0]['no_rek'] ?>" >
+                <input name="harga_lapangan" type="hidden" value="<?= $detailGedung[0]['harga_lapangan'] ?>" >
+                <input name="nomor_telepon" type="hidden" value="<?= $detailGedung[0]['nomor_telepon'] ?>" >
+                <input name="tanggal" type="hidden" value="<?= isset($_GET['tanggal']) ? $_GET['tanggal'] : '' ?>" >
+                <button style="display: <?= isset($_GET['tanggal']) ? 'flex' : 'none' ?>;" class="create-data">Tambah</button>
+        </form>
+        <!-- <form action="<?= urlpath('/dashboard/detail-gedung?' . $_GET['gedung' . '?tanggal=' . $tgll]) ?>" method="post"> -->
+        <form action="" method="get">
             <input id="gedung" type="hidden" name="gedung" value="<?= $_GET['gedung'] ?>">
             <input id="tanggal" class="cari-data" type="text" value="<?= isset($_GET['tanggal']) ? $_GET['tanggal'] : '' ?>" name="tanggal" size="10" placeholder="Masukkan Tanggal" onfocus="(this.type='date')" autocomplete="off" id="tanggal" />
             <button id="buttonCari" type="submit" class="btnn-cari">Cari Data</button>
@@ -72,7 +81,7 @@ if (isset($_GET['tanggal'])) {
     </div>
 </div>
 
-<script>
+<!-- <script>
     var tanggal = document.getElementById('tanggal');
     var gedung = document.getElementById('gedung');
     var tombolCari = document.getElementById('buttonCari');
@@ -90,4 +99,4 @@ if (isset($_GET['tanggal'])) {
         xhr.open('GET', '<?= urlpath('dashboard/dgedung?gedung='); ?>' + gedung.value + '&tanggal=' + tanggal.value, true);
         xhr.send();
     })
-</script>
+</script> -->

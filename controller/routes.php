@@ -23,6 +23,8 @@ Router::url('dashboard/data-gedung/deactivate', 'get', 'GedungController::saveIn
 
 #RENTER
 Router::url('dashboard/detail-gedung', 'get', 'GedungController::detailGedung');
+Router::url('dashboard/detail-gedung/add', 'post', 'TransaksiController::add');
+
 Router::url('dashboard/pesanan-saya', 'get', 'TransaksiController::detailTransaksi');
 // Router::url('dashboard/dgedung', 'get', 'GedungController::dGedung');
 
@@ -38,6 +40,10 @@ Router::url('transaksi/edit', 'get', 'TransaksiController::edit');
 #POST
 Router::url('login', 'post', 'AuthController::saveLogin');
 Router::url('register', 'post', 'AuthController::saveRegister');
+
+#RENTER
+Router::url('dashboard/detail-gedung/addData', 'post', 'TransaksiController::saveAdd');
+
 
 
 Router::url('transaksi/add', 'post', 'TransaksiController::saveAdd');

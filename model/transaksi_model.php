@@ -71,33 +71,29 @@ class Transaksi
     static function create($data)
     {
         global $conn;
-        $tanggal_transaksi = htmlspecialchars($data['tanggal_transaksi']); 
-        $nama_penyewa = htmlspecialchars($data['nama_penyewa']);
-        $barang_disewa = htmlspecialchars($data['barang_disewa']);
-        $jumlah_harga = htmlspecialchars($data['jumlah_harga']);
-        $nomor_telepon = htmlspecialchars($data['nomor_telepon']);
-
-        $gambar = self::upload();
-
-        if (!$gambar) {
-            return false;
-        }
-
-        $sql = "INSERT INTO transaksi(tanggal_transaksi, nama_penyewa, barang_disewa, jumlah_harga, nomor_telepon, gambar) VALUES (?, ?, ?, ?, ?, ?)";
+        $tanggal = htmlspecialchars($data['tanggal']); 
+        $idJam = htmlspecialchars($data['jam_id']);
+        $idDetail = htmlspecialchars($data['detail_id']);
+        $idUser = htmlspecialchars($data['user_id']);
+        $status = 'diproses';
+        $bukti = $data['bukti_transfer']; 
+    
+        $sql = "INSERT INTO transaksi(detail_id, jam_id, user_id, tanggal, bukti_transfer, status) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssiss', $tanggal_transaksi, $nama_penyewa, $barang_disewa, $jumlah_harga, $nomor_telepon, $gambar);
+        $stmt->bind_param('iiisss', $idDetail, $idJam, $idUser, $tanggal, $bukti, $status);
         $stmt->execute();
         $result = $stmt->affected_rows > 0 ? true : false;
         $stmt->close();
         return $result;
     }
+    
     static function upload()
     {
 
-        $namaFile = $_FILES["struk"]["name"];
-        $ukuranFile = $_FILES["struk"]["size"];
-        $error = $_FILES["struk"]["error"];
-        $tmpName = $_FILES["struk"]["tmp_name"];
+        $namaFile = $_FILES["bukti_transfer"]["name"];
+        $ukuranFile = $_FILES["bukti_transfer"]["size"];
+        $error = $_FILES["bukti_transfer"]["error"];
+        $tmpName = $_FILES["bukti_transfer"]["tmp_name"];
 
         //cek apakah ada gambar yang di upload
         if ($error !== 4) {
@@ -109,6 +105,7 @@ class Transaksi
                 echo "
                 <script>
                     alert('Upload hanya gambar, jangan file lain!')
+                    window.location.href = '".BASEURL."dashboard/pesanan-saya';
                 </script>;
                 ";
                 return false;
@@ -118,6 +115,7 @@ class Transaksi
                     echo "
                     <script>
                         alert('Ukuran gambar terlalu besar!')
+                        window.location.href = '".BASEURL."dashboard/pesanan-saya';
                     </script>;
                     ";
                     return false;
@@ -126,7 +124,7 @@ class Transaksi
                     $namaFileBaru = uniqid();
                     $namaFileBaru .= "." . $ekstensiGambar;
                     // lolos pengecekan, gambar siap diupload
-                    move_uploaded_file($tmpName, 'img/struk/' . $namaFileBaru);
+                    move_uploaded_file($tmpName, 'img/bukti_transaksi/' . $namaFileBaru);
                     return $namaFileBaru;
                 }
             }
