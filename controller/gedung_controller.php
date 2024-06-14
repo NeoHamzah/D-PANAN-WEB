@@ -59,4 +59,24 @@ class GedungController
         }
     }
 
+    static function ajax() {
+        if (!isset($_SESSION['user'])) {
+            header('Location: '.BASEURL.'auth?auth=false');
+            exit;
+        } else {
+            if ($_SESSION['user']['role'] === 'renter') {
+                view('renter/data_gedung', [
+                    'detailGedung' => Gedung::selectSatuGedung($_GET['gedung']),
+                    'lapangan' => Gedung::selectLapangan($_GET['gedung']),
+                    'jam' => Gedung::selectJam(),
+                    'transaksi' => Transaksi::selectTransaksiGedung($_GET['gedung']),
+                    'tanggal' => $_GET['tanggal']
+                ]);
+            } else {
+                header('Location: '.BASEURL.'auth?auth=false');
+                exit;
+            }
+        }
+    }
+
 }

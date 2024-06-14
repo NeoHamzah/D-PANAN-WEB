@@ -29,6 +29,8 @@ Router::url('dashboard/kontrol-pesanan/update', 'get', 'TransaksiController::edi
 Router::url('dashboard/detail-gedung', 'get', 'GedungController::detailGedung');
 Router::url('dashboard/detail-gedung/add', 'post', 'TransaksiController::add');
 Router::url('dashboard/pesanan-saya', 'get', 'TransaksiController::detailTransaksi');
+Router::url('dashboard/ajax', 'get', 'GedungController::ajax');
+
 // Router::url('dashboard/dgedung', 'get', 'GedungController::dGedung');
 
 

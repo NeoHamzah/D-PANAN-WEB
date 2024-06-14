@@ -1,12 +1,4 @@
-<?php
-if (isset($_GET['tanggal'])) {
-    $tgll = $_GET['tanggal'];
-} else {
-    $tgll = '';
-};
 
-// var_dump($detailGedung[0]['slug'])
-?>
 
 <div class="container-top">
     <div class="con-detail">
@@ -32,13 +24,13 @@ if (isset($_GET['tanggal'])) {
                 <input name="no_rek" type="hidden" value="<?= $detailGedung[0]['no_rek'] ?>" >
                 <input name="harga_lapangan" type="hidden" value="<?= $detailGedung[0]['harga_lapangan'] ?>" >
                 <input name="nomor_telepon" type="hidden" value="<?= $detailGedung[0]['nomor_telepon'] ?>" >
-                <input name="tanggal" type="hidden" value="<?= isset($_GET['tanggal']) ? $_GET['tanggal'] : '' ?>" >
-                <button style="display: <?= isset($_GET['tanggal']) ? 'flex' : 'none' ?>;" class="create-data">Tambah</button>
+                <input name="tanggal" type="hidden" value="" >
+                <button class="create-data">Tambah</button>
         </form>
-        <!-- <form action="<?= urlpath('/dashboard/detail-gedung?' . $_GET['gedung' . '?tanggal=' . $tgll]) ?>" method="post"> -->
-        <form action="" method="get">
+        <!-- <form action="" method="get"> -->
+        <form action="" method="POST" id="jadwal-gedung" >
             <input id="gedung" type="hidden" name="gedung" value="<?= $_GET['gedung'] ?>">
-            <input id="tanggal" class="cari-data" type="text" value="<?= isset($_GET['tanggal']) ? $_GET['tanggal'] : '' ?>" name="tanggal" size="10" placeholder="Masukkan Tanggal" onfocus="(this.type='date')" autocomplete="off" id="tanggal" />
+            <input id="tanggal" class="cari-data" type="text" value="" name="tanggal" size="10" placeholder="Masukkan Tanggal" onfocus="(this.type='date')" autocomplete="off" id="tanggal" />
             <button id="buttonCari" type="submit" class="btnn-cari">Cari Data</button>
         </form>
     </div>
@@ -51,52 +43,40 @@ if (isset($_GET['tanggal'])) {
                 <?php endforeach ?>
             </tr>
 
-            <?php foreach ($jam as $j) : ?>
-                <tr>
-                    <td class="border-2 border-[#ffffff]"><?= $j['jam_sewa'] ?></td>
-                    <?php foreach ($lapangan as $lp) : ?>
-                        <td class="w-[250px] border-2 border-[#ffffff]">
-                            <?php
-                            foreach ($transaksi as $tr) {
-                                if (isset($_GET['tanggal'])) {
-                                    if ($tr['tanggal'] == $_GET['tanggal']) {
-                                        if ($tr['jam_sewa'] == $j['jam_sewa']) {
-                                            if ($tr['nama_lapangan'] == $lp['nama_lapangan']) {
-                                                if ($tr['username'] == $_SESSION['user']['username']) {
-                                                    echo ($tr['username']);
-                                                } else {
-                                                    echo ('<p class="text-red-600 font-bold" >Sudah Terisi!<p>');
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            ?>
-                        </td>
-                    <?php endforeach ?>
-                </tr>
-            <?php endforeach ?>
         </table>
     </div>
 </div>
 
-<!-- <script>
-    var tanggal = document.getElementById('tanggal');
-    var gedung = document.getElementById('gedung');
-    var tombolCari = document.getElementById('buttonCari');
-    var container = document.getElementById('tabel-k');
+<script>
+$(document).ready(function() {
+    $('.create-data').hide();
 
-    tombolCari.addEventListener('click', function(){
-        var xhr = new XMLHttpRequest();
+    $('#buttonCari').click(function(e) {
+        e.preventDefault();
+        $('.create-data').show();
 
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                container.innerHTML = xhr.responseText;
+        var tanggal = $('#tanggal').val();
+        var gedung = $('#gedung').val();
+        var url = '<?= urlpath("dashboard/ajax?gedung=") ?>' + gedung + '&tanggal=' + tanggal;
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(response) {
+                $('.tabel-k').html(response);
             }
-        }
+        });
+    });
+});
 
-        xhr.open('GET', '<?= urlpath('dashboard/dgedung?gedung='); ?>' + gedung.value + '&tanggal=' + tanggal.value, true);
-        xhr.send();
-    })
-</script> -->
+
+$(document).ready(function() {
+    $('#jadwal-gedung #tanggal').on('change', function() {
+        var tanggalValue = $(this).val();
+        $('.aksi-atas input[name="tanggal"]').val(tanggalValue);
+    });
+});
+
+
+
+</script>

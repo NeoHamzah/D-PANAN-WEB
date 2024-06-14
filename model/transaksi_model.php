@@ -4,20 +4,6 @@ include_once 'config/conn.php';
 
 class Transaksi
 {
-    // static function select()
-    // {
-    //     global $conn;
-    //     $sql = "SELECT * FROM transaksi";
-    //     $result = mysqli_query($conn, $sql);
-    //     $data = array();
-    //     if ($result->num_rows > 0) {
-    //         while ($a = $result->fetch_array()) {
-    //             $data[] = $a;
-    //         }
-    //     }
-    //     return $data;
-    // }
-
     static function updateTerima($id_transaksi)
     {
         global $conn;

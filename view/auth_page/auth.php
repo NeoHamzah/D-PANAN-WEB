@@ -19,15 +19,15 @@ if (isset($errorLog)) {
       <?php if (array_key_exists('email', $errReg)) : ?>
         <p style="color: red; font-size: 12px; font-weight: 600; text-align: left; margin: 0px 0px 0px 0px;"><?= $errReg['email'] ?></p>
       <?php endif ?>
-      <input type="email" placeholder="Email" name="email" />
+      <input type="email" required placeholder="Email" name="email" />
       <?php if (array_key_exists('username', $errReg)) : ?>
         <p style="color: red; font-size: 12px; font-weight: 600; text-align: left; margin: 0px 0px 0px 0px;"><?= $errReg['username'] ?></p>
       <?php endif ?>
-      <input type="text" placeholder="Username" name="username" />
+      <input type="text" required placeholder="Username" name="username" />
       <?php if (array_key_exists('password', $errReg)) : ?>
         <p style="color: red; font-size: 12px; font-weight: 600; text-align: left; margin: 0px 0px 0px 0px;"><?= $errReg['password'] ?></p>
       <?php endif ?>
-      <input type="password" placeholder="Password" name="password" />
+      <input type="password" required placeholder="Password" name="password" />
       <button>Register</button>
     </form>
   </div>
@@ -41,7 +41,7 @@ if (isset($errorLog)) {
       <?php if (array_key_exists('password', $errLog)) : ?>
         <p style="color: red; font-size: 12px; font-weight: 600; text-align: left; margin: 0px 0px 0px 0px;"><?= $errLog['password'] ?></p>
       <?php endif ?>
-      <input type="password" placeholder="Password" name="password" />
+      <input type="password" required placeholder="Password" name="password" />
       <button>Login</button>
     </form>
   </div>
