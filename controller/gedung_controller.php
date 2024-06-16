@@ -72,6 +72,14 @@ class GedungController
                     'transaksi' => Transaksi::selectTransaksiGedung($_GET['gedung']),
                     'tanggal' => $_GET['tanggal']
                 ]);
+            } else if ($_SESSION['user']['role'] === 'owner') {
+                view('owner/data_gedung', [
+                    'detailGedung' => Gedung::selectSatuGedung($_GET['gedung']),
+                    'lapangan' => Gedung::selectLapangan($_GET['gedung']),
+                    'jam' => Gedung::selectJam(),
+                    'transaksi' => Transaksi::selectTransaksiGedung($_GET['gedung']),
+                    'tanggal' => $_GET['tanggal']
+                ]);
             } else {
                 header('Location: '.BASEURL.'auth?auth=false');
                 exit;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Waktu pembuatan: 14 Jun 2024 pada 00.47
+-- Waktu pembuatan: 14 Jun 2024 pada 12.25
 -- Versi server: 8.0.35-0ubuntu0.22.04.1
 -- Versi PHP: 8.1.27
 
@@ -94,11 +94,11 @@ CREATE TABLE `gedung` (
 --
 
 INSERT INTO `gedung` (`id_gedung`, `nama_gedung`, `user_id`, `nomor_telepon`, `deskripsi_gedung`, `an_rek`, `no_rek`, `harga_lapangan`, `gambar_gedung`, `status`, `slug`) VALUES
-(1, 'Futsalindo', 2, '089787467389', 'Gedung Futsalindo merupakan tempat yang sempurna untuk bermain futsal. Lapangan yang tersedia ada 6 dengan fasilitas yang lengkap dan terjamin kualitasnya. Memiliki lokasi yang strategis di tengah kota Jember yaitu Jl. Mojopahit No. 15, Gerdu, Sempusari, Kec. Kaliwates. \n', 'Amirul Hamzah', 'BRI: 793001013924532', 25000, 'futsalindo.jpg', 'active', 'futsalindo'),
-(2, 'Zona Futsal', 3, '087467864536', 'Zona Futsal merupakan gedung olahraga futsal yang memiliki beberapa fasilitas yang lengkap dan memiliki 7 lapangan yang tersedia. Gedung ini terletak di Jl. Hayam Wuruk No. 183, Karang Miuwo, Mangli, Kec. Kaliwates. ', 'Farda Zulfa', 'BNI: 098098761537164', 30000, 'zonafutsal.jpg', 'active', 'zona-futsal'),
-(3, 'Elphasindo', 4, '087648937462', 'Elphasindo merupakan fasilitas olahraga modern yang dirancang khusus untuk permainan futsal. Terletak di lokasi yang strategis yaitu Jl. Mastrip No. 59A-N, Krajan Timur, Sumbersari, Kec. Sumbersari, gedung ini menawarkan sarana dan prasarana terbaik untuk mendukung aktivitas futsal baik untuk chilling maupun kompetisi.', 'Ainol Yakin', 'BTN: 876930975912674', 35000, 'elphasindo.png', 'active', 'elphasindo'),
-(4, 'Lapangan 8', 5, '087964736523', 'Lapangan 8 adalah gedung olahraga yang secara khusus didesain untuk menyelenggarakan pertandingan dan latihan badminton. Berlokasi di kompleks olahraga kami, gedung ini menjadi pusat kegiatan bagi para pecinta olahraga bulu tangkis. Gedung ini terletak di Jl. Teuku Umar Gg. 8, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates.', 'Ahmad Hamzah', 'BCA: 768390465829302', 20000, 'lapangan8.jpg', 'active', 'lapangan-8'),
-(5, 'Argopuro', 6, '089765473526', 'Argopuro merupakan fasilitas olahraga yang menyediakan fasilitas untuk olahraga badminton baik untuk latihan maupun kompetisi. Gedung ini terletak di Jl. HOS Cokroaminoto No. 5, Kelurahan Jember Kidul, Jember Kidul, Kec. Kaliwates', 'Rezkiya Yakin', 'BSI: 764984750294739', 25000, 'argopuro.jpg', 'active', 'argopuro');
+(1, 'Futsalindo', 2, '089787467389', 'Gedung Futsalindo merupakan tempat yang sempurna untuk bermain futsal. Lapangan yang tersedia ada 6 dengan fasilitas yang lengkap dan terjamin kualitasnya. Memiliki lokasi yang strategis di tengah kota Jember yaitu Jl. Mojopahit No. 15, Gerdu, Sempusari, Kec. Kaliwates. \n', 'Amirul Hamzah', 'BRI: 793001013924532', 85000, 'futsalindo.jpg', 'active', 'futsalindo'),
+(2, 'Zona Futsal', 3, '087467864536', 'Zona Futsal merupakan gedung olahraga futsal yang memiliki beberapa fasilitas yang lengkap dan memiliki 7 lapangan yang tersedia. Gedung ini terletak di Jl. Hayam Wuruk No. 183, Karang Miuwo, Mangli, Kec. Kaliwates. ', 'Farda Zulfa', 'BNI: 098098761537164', 75000, 'zonafutsal.jpg', 'active', 'zona-futsal'),
+(3, 'Elphasindo', 4, '087648937462', 'Elphasindo merupakan fasilitas olahraga modern yang dirancang khusus untuk permainan futsal. Terletak di lokasi yang strategis yaitu Jl. Mastrip No. 59A-N, Krajan Timur, Sumbersari, Kec. Sumbersari, gedung ini menawarkan sarana dan prasarana terbaik untuk mendukung aktivitas futsal baik untuk chilling maupun kompetisi.', 'Ainol Yakin', 'BTN: 876930975912674', 80000, 'elphasindo.png', 'active', 'elphasindo'),
+(4, 'Lapangan 8', 5, '087964736523', 'Lapangan 8 adalah gedung olahraga yang secara khusus didesain untuk menyelenggarakan pertandingan dan latihan badminton. Berlokasi di kompleks olahraga kami, gedung ini menjadi pusat kegiatan bagi para pecinta olahraga bulu tangkis. Gedung ini terletak di Jl. Teuku Umar Gg. 8, Tegal Besar Kulon, Tegal Besar, Kec. Kaliwates.', 'Ahmad Hamzah', 'BCA: 768390465829302', 50000, 'lapangan8.jpg', 'active', 'lapangan-8'),
+(5, 'Argopuro', 6, '089765473526', 'Argopuro merupakan fasilitas olahraga yang menyediakan fasilitas untuk olahraga badminton baik untuk latihan maupun kompetisi. Gedung ini terletak di Jl. HOS Cokroaminoto No. 5, Kelurahan Jember Kidul, Jember Kidul, Kec. Kaliwates', 'Rezkiya Yakin', 'BSI: 764984750294739', 100000, 'argopuro.jpg', 'active', 'argopuro');
 
 -- --------------------------------------------------------
 
@@ -260,8 +260,8 @@ INSERT INTO `transaksi` (`id_transaksi`, `detail_id`, `jam_id`, `user_id`, `tang
 (143, 30, 12, 7, '2024-06-15', '666998887424a.jpeg', 'diterima'),
 (144, 28, 13, 7, '2024-06-16', '666998a412574.jpg', 'diterima'),
 (145, 29, 13, 7, '2024-06-16', '666998a412574.jpg', 'diterima'),
-(146, 28, 14, 7, '2024-06-16', '666998a412574.jpg', 'diterima'),
-(147, 29, 14, 7, '2024-06-16', '666998a412574.jpg', 'diterima'),
+(146, 28, 14, 7, '2024-06-16', '666998a412574.jpg', 'ditolak'),
+(147, 29, 14, 7, '2024-06-16', '666998a412574.jpg', 'ditolak'),
 (148, 29, 15, 7, '2024-06-16', '666998a412574.jpg', 'diterima'),
 (149, 27, 3, 7, '2024-06-27', '666998c5c4374.jpeg', 'diterima'),
 (150, 28, 3, 7, '2024-06-27', '666998c5c4374.jpeg', 'diterima'),
@@ -424,7 +424,57 @@ INSERT INTO `transaksi` (`id_transaksi`, `detail_id`, `jam_id`, `user_id`, `tang
 (307, 28, 5, 11, '2024-06-22', '6669b02f25b39.jpeg', 'diterima'),
 (308, 29, 5, 11, '2024-06-22', '6669b02f25b39.jpeg', 'diterima'),
 (309, 27, 6, 11, '2024-06-22', '6669b02f25b39.jpeg', 'diterima'),
-(310, 28, 6, 11, '2024-06-22', '6669b02f25b39.jpeg', 'diterima');
+(310, 28, 6, 11, '2024-06-22', '6669b02f25b39.jpeg', 'diterima'),
+(314, 28, 11, 11, '2024-06-27', '666be195846be.jpeg', 'diterima'),
+(315, 29, 11, 11, '2024-06-27', '666be195846be.jpeg', 'diterima'),
+(316, 28, 12, 11, '2024-06-27', '666be195846be.jpeg', 'diterima'),
+(317, 29, 12, 11, '2024-06-27', '666be195846be.jpeg', 'diterima'),
+(318, 30, 12, 11, '2024-06-27', '666be195846be.jpeg', 'diterima'),
+(319, 19, 14, 11, '2024-06-29', '666be1b7e708f.jpg', 'diterima'),
+(320, 20, 14, 11, '2024-06-29', '666be1b7e708f.jpg', 'diterima'),
+(321, 21, 14, 11, '2024-06-29', '666be1b7e708f.jpg', 'diterima'),
+(322, 20, 15, 11, '2024-06-29', '666be1b7e708f.jpg', 'diterima'),
+(323, 21, 15, 11, '2024-06-29', '666be1b7e708f.jpg', 'diterima'),
+(324, 19, 13, 11, '2024-06-22', '666be1cb7bc7d.jpeg', 'diterima'),
+(325, 20, 13, 11, '2024-06-22', '666be1cb7bc7d.jpeg', 'diterima'),
+(326, 21, 13, 11, '2024-06-22', '666be1cb7bc7d.jpeg', 'diterima'),
+(327, 19, 14, 11, '2024-06-22', '666be1cb7bc7d.jpeg', 'diterima'),
+(328, 20, 14, 11, '2024-06-22', '666be1cb7bc7d.jpeg', 'diterima'),
+(329, 7, 14, 11, '2024-06-24', '666be1dccca95.jpeg', 'diterima'),
+(330, 8, 14, 11, '2024-06-24', '666be1dccca95.jpeg', 'diterima'),
+(331, 9, 14, 11, '2024-06-24', '666be1dccca95.jpeg', 'diterima'),
+(332, 7, 15, 11, '2024-06-24', '666be1dccca95.jpeg', 'diterima'),
+(333, 8, 15, 11, '2024-06-24', '666be1dccca95.jpeg', 'diterima'),
+(334, 1, 13, 11, '2024-06-19', '666be217e2506.jpeg', 'diterima'),
+(335, 2, 13, 11, '2024-06-19', '666be217e2506.jpeg', 'diterima'),
+(336, 1, 14, 11, '2024-06-19', '666be217e2506.jpeg', 'diterima'),
+(337, 2, 14, 11, '2024-06-19', '666be217e2506.jpeg', 'diterima'),
+(338, 2, 15, 11, '2024-06-19', '666be217e2506.jpeg', 'diterima'),
+(339, 20, 13, 7, '2024-06-29', '666be248cff6a.jpeg', 'diterima'),
+(340, 21, 13, 7, '2024-06-29', '666be248cff6a.jpeg', 'diterima'),
+(341, 20, 14, 7, '2024-06-29', '666be248cff6a.jpeg', 'diterima'),
+(342, 21, 14, 7, '2024-06-29', '666be248cff6a.jpeg', 'diterima'),
+(343, 22, 14, 7, '2024-06-29', '666be248cff6a.jpeg', 'diterima'),
+(344, 1, 14, 7, '2024-06-29', '666be477edeb6.jpeg', 'diterima'),
+(345, 2, 14, 7, '2024-06-29', '666be477edeb6.jpeg', 'diterima'),
+(346, 3, 14, 7, '2024-06-29', '666be477edeb6.jpeg', 'diterima'),
+(347, 4, 14, 7, '2024-06-29', '666be477edeb6.jpeg', 'diterima'),
+(348, 5, 14, 7, '2024-06-29', '666be477edeb6.jpeg', 'diterima'),
+(349, 7, 12, 7, '2024-06-29', '666be48c8eb1d.jpeg', 'diterima'),
+(350, 8, 12, 7, '2024-06-29', '666be48c8eb1d.jpeg', 'diterima'),
+(351, 9, 12, 7, '2024-06-29', '666be48c8eb1d.jpeg', 'diterima'),
+(352, 7, 13, 7, '2024-06-29', '666be48c8eb1d.jpeg', 'diterima'),
+(353, 8, 13, 7, '2024-06-29', '666be48c8eb1d.jpeg', 'diterima'),
+(354, 14, 12, 7, '2024-06-29', '666be4a01d510.jpeg', 'diterima'),
+(355, 14, 13, 7, '2024-06-29', '666be4a01d510.jpeg', 'diterima'),
+(356, 15, 13, 7, '2024-06-29', '666be4a01d510.jpeg', 'diterima'),
+(357, 14, 14, 7, '2024-06-29', '666be4a01d510.jpeg', 'diterima'),
+(358, 15, 14, 7, '2024-06-29', '666be4a01d510.jpeg', 'diterima'),
+(359, 19, 13, 7, '2024-06-17', '666be4fa0433f.jpg', 'diterima'),
+(360, 20, 13, 7, '2024-06-17', '666be4fa0433f.jpg', 'diterima'),
+(361, 21, 13, 7, '2024-06-17', '666be4fa0433f.jpg', 'diterima'),
+(362, 19, 14, 7, '2024-06-17', '666be4fa0433f.jpg', 'diterima'),
+(363, 20, 14, 7, '2024-06-17', '666be4fa0433f.jpg', 'diterima');
 
 -- --------------------------------------------------------
 
@@ -521,7 +571,7 @@ ALTER TABLE `jam`
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=364;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

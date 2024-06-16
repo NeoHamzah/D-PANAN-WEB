@@ -62,43 +62,49 @@
 </div> -->
 
 <div class="container-bottom">
-    <h2>Tabel Data Transaksi Sewa</h2>
+    <h2 class="text-[24px] font-bold">Jadwal Gedung <?= $detailGedung[0]['nama_gedung'] ?></h2>
     <hr />
     <div class="aksi-atass">
-        <form action="" method="get">
-            <input class="cari-data" type="text" name="keyword" placeholder="Cari..." size="10" autocomplete="off" id="keyword" />
+        <!-- <form action="" method="get"> -->
+        <form action="" method="POST" id="jadwal-gedung">
+            <input id="gedung" type="hidden" name="gedung" value="<?= $detailGedung[0]['slug'] ?>">
+            <input id="tanggal" class="cari-data" type="text" value="" name="tanggal" size="10" placeholder="Masukkan Tanggal" onfocus="(this.type='date')" autocomplete="off" id="tanggal" />
             <button id="buttonCari" type="submit" class="btnn-cari">Cari Data</button>
         </form>
     </div>
-    <div class="tabel">
+    <div class="tabel-k">
         <table cellspacing="0">
             <tr>
-                <th>No.</th>
-                <th>Nama Renter</th>
-                <th>Tanggal Sewa</th>
-                <th>Jam Sewa</th>
-                <th>Nama Lapangan</th>
-                <th>Bukti Transfer</th>
-                <th>Status</th>
+                <th class="w-[250px] border-2 border-[#ffffff]"></th>
+                <?php foreach ($lapangan as $lap) : ?>
+                    <th class="border-2 border-[#ffffff]"><?= $lap['nama_lapangan'] ?></th>
+                <?php endforeach ?>
             </tr>
 
-            <?php $i = 1;
-            foreach ($transaksi as $row) :
-                if (!isset($_GET['keyword']) || $row['username'] == $_GET['keyword'] || $row['tanggal'] == $_GET['keyword'] || $row['jam_sewa'] == $_GET['keyword'] || $row['nama_lapangan'] == $_GET['keyword'] || $row['status'] == $_GET['keyword']) :
-            ?>
-
-                    <tr>
-                        <td><?= $i ?></td>
-                        <td><?= $row['username'] ?></td>
-                        <td><?= $row['tanggal'] ?></td>
-                        <td><?= $row['jam_sewa'] ?></td>
-                        <td><?= $row['nama_lapangan'] ?></td>
-                        <td class="gambarTabel"><img src="img/bukti_transaksi/<?= $row['bukti_transfer'] ?>" alt="bukti transfer"></td>
-                        <td><?= $row['status'] ?></td>
-                    </tr>
-                    <?php $i++ ?>
-                <?php endif ?>
-            <?php endforeach ?>
         </table>
     </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        $('#buttonCari').click(function(e) {
+            e.preventDefault();
+
+            console.log('oke')
+
+            var tanggal = $('#tanggal').val();
+            var gedung = $('#gedung').val();
+            var url = '<?= urlpath("dashboard/ajax?gedung=") ?>' + gedung + '&tanggal=' + tanggal;
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function(response) {
+                    $('.tabel-k').html(response);
+                }
+            });
+        });
+    });
+</script>
 </div>

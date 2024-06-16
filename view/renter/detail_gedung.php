@@ -76,7 +76,4 @@ $(document).ready(function() {
         $('.aksi-atas input[name="tanggal"]').val(tanggalValue);
     });
 });
-
-
-
 </script>
